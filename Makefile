@@ -90,3 +90,19 @@ css: tailwind
 watch-css: tailwind
 	@mkdir -p $(dir $(CSS_OUT))
 	$(TAILWIND) -i $(CSS_IN) -o $(CSS_OUT) --watch
+
+
+# Deploy output/ to GitHub Pages (gh-pages branch) via ghp-import
+.PHONY: _check-ghp github
+
+_check-ghp:
+	@command -v ghp-import >/dev/null 2>&1 || { \
+		echo "ERROR: ghp-import not found. Install it in your venv:" >&2; \
+		echo "  pip install ghp-import" >&2; \
+		exit 1; \
+	}
+
+# Clean -> publish (prod build) -> push output/ to gh-pages and set it as Pages source
+github: _check-ghp clean publish
+	ghp-import -n -p "$(OUTPUTDIR)"
+	@echo "Deployed to gh-pages. If first time, set Pages source to 'gh-pages / root' in GitHub → Settings → Pages."

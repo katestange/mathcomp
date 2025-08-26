@@ -1,32 +1,27 @@
 
 {% extends "base.html" %}
-{% block title %}{{ SITENAME }}{% endblock %}
+
 {% block content %}
-<section class="hero">
-  <h1>{{ SITENAME }}</h1>
-  {% if SITESUBTITLE %}<p class="lede">{{ SITESUBTITLE }}</p>{% endif %}
-  {% if COURSE_META %}
-  <ul class="meta">
-    {% for item in COURSE_META %}<li>{{ item }}</li>{% endfor %}
-  </ul>
-  {% endif %}
-</section>
+  <section class="max-w-4xl mx-auto px-6 py-12">
+    <div class="text-center space-y-2 my-8">
+      <h1 class="text-5xl font-serif font-bold">
+        Topics in Number Theory: Mathematical Computation
+      </h1>
+      <h2 class="text-2xl font-serif text-primary">
+        Math 8114 • Fall 2025
+      </h2>
+      <h3 class="text-xl font-serif text-muted-foreground">
+        Katherine E. Stange
+      </h3>
+    </div>
 
-<section class="cards">
-  <a class="card" href="/syllabus.html"><h2>Syllabus</h2><p>Policies, grading, materials</p></a>
-  <a class="card" href="/schedule.html"><h2>Schedule</h2><p>Week-by-week plan & links</p></a>
-  <a class="card" href="/assignments.html"><h2>Assignments</h2><p>Problem sets & due dates</p></a>
-  <a class="card" href="/resources.html"><h2>Resources</h2><p>Software, notes, references</p></a>
-</section>
-
-{% if articles and SHOW_LATEST_POSTS %}
-<section class="latest">
-  <h2>Latest Updates</h2>
-  <ul>
-    {% for article in articles[:SHOW_LATEST_POSTS] %}
-      <li><a href="{{ article.url }}">{{ article.title }}</a> <span class="date">{{ article.date.strftime('%Y-%m-%d') }}</span></li>
-    {% endfor %}
-  </ul>
-</section>
-{% endif %}
+    <!-- Optional intro copy -->
+    <div class="prose mx-auto">
+      <p>You will be bringing your laptop to class every day; this is a workshop, not lecture, course.</p>
+      <p>Before the first day of class, please try to get <a href="sagemath.html">Sage installed on your own machine</a>.
+         Sage is also available to graduate students at <a href="https://sage.colorado.edu/">sage.colorado.edu</a>.
+      </p>
+    </div>
+  </section>
 {% endblock %}
+

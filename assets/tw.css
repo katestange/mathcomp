@@ -1,38 +1,130 @@
+
 @import "tailwindcss";
 
-/* Tell v4 exactly where to scan (optional but useful here) */
+/* Tell Tailwind v4 where to look for class names */
 @source "theme/**/*.html";
 @source "content/**/*.md";
 
-/* Your design tokens (the values can be whatever you like) */
+/* -------------------------
+   Design tokens (from old site)
+   All colors are HSL components (no hsl() wrapper here).
+-------------------------- */
 :root {
-  --background: 0 0% 100%;
-  --foreground: 222 47% 11%;
-  --border: 214 32% 91%;
-  --ring: 224 76% 48%;
-  --primary: 224 76% 48%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 220 14% 96%;
-  --secondary-foreground: 222 47% 11%;
-  --muted: 220 14% 96%;
-  --muted-foreground: 215 16% 47%;
-  --accent: 220 14% 96%;
-  --accent-foreground: 222 47% 11%;
+  /* Warm academic palette */
+  --background: 0 0% 99%;
+  --foreground: 215 25% 12%;
+
+  --card: 0 0% 100%;
+  --card-foreground: 215 25% 12%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 215 25% 12%;
+
+  /* Light olive green as brand primary */
+  --primary: 82 25% 45%;
+  --primary-foreground: 0 0% 98%;
+
+  /* Supporting tones */
+  --secondary: 215 15% 96%;
+  --secondary-foreground: 215 25% 12%;
+
+  --muted: 215 15% 96%;
+  --muted-foreground: 215 12% 45%;
+
+  --accent: 45 85% 92%;
+  --accent-foreground: 215 25% 12%;
+
   --destructive: 0 84% 60%;
-  --destructive-foreground: 0 0% 100%;
-  --input: 214 32% 91%;
-  --math-blue: 224 76% 48%;
-  --math-blue-light: 224 80% 60%;
-  --math-gold: 45 100% 47%;
-  --math-gold-light: 45 100% 60%;
+  --destructive-foreground: 0 0% 98%;
+
+  --border: 215 15% 91%;
+  --input: 215 15% 91%;
+  --ring: 82 25% 55%;
+
+  /* Radius + shadows/gradients */
+  --radius: 0.75rem;
+  --shadow-elegant: 0 4px 6px -1px hsl(215 15% 15% / 0.10), 0 2px 4px -1px hsl(215 15% 15% / 0.06);
+  --shadow-card: 0 1px 3px 0 hsl(215 15% 15% / 0.10), 0 1px 2px 0 hsl(215 15% 15% / 0.06);
+  --gradient-primary: linear-gradient(135deg, hsl(82 25% 45%), hsl(82 25% 55%));
+  --gradient-subtle: linear-gradient(180deg, hsl(0 0% 99%), hsl(82 5% 98%));
+
+  /* “Math” accent colors */
+  --math-blue: 82 25% 45%;
+  --math-blue-light: 82 25% 55%;
+  --math-gold: 45 85% 50%;
+  --math-gold-light: 45 85% 92%;
+
+  /* Sidebar tokens (kept for completeness) */
+  --sidebar-background: 0 0% 98%;
+  --sidebar-foreground: 240 5.3% 26.1%;
+  --sidebar-primary: 240 5.9% 10%;
+  --sidebar-primary-foreground: 0 0% 98%;
+  --sidebar-accent: 240 4.8% 95.9%;
+  --sidebar-accent-foreground: 240 5.9% 10%;
+  --sidebar-border: 220 13% 91%;
+  --sidebar-ring: 217.2 91.2% 59.8%;
 }
 
-/* Make Tailwind generate utilities like bg-background, text-foreground, border-border, etc. */
+.dark {
+  --background: 215 25% 6%;
+  --foreground: 0 0% 95%;
+
+  --card: 215 25% 8%;
+  --card-foreground: 0 0% 95%;
+
+  --popover: 215 25% 8%;
+  --popover-foreground: 0 0% 95%;
+
+  --primary: 82 25% 65%;
+  --primary-foreground: 82 25% 6%;
+
+  --secondary: 215 15% 12%;
+  --secondary-foreground: 0 0% 95%;
+
+  --muted: 215 15% 12%;
+  --muted-foreground: 215 12% 65%;
+
+  --accent: 45 85% 25%;
+  --accent-foreground: 0 0% 95%;
+
+  --destructive: 0 62% 50%;
+  --destructive-foreground: 0 0% 95%;
+
+  --border: 215 15% 15%;
+  --input: 215 15% 15%;
+  --ring: 82 25% 65%;
+
+  --math-blue: 82 25% 65%;
+  --math-blue-light: 82 25% 75%;
+  --math-gold: 45 85% 60%;
+  --math-gold-light: 45 85% 25%;
+
+  --gradient-primary: linear-gradient(135deg, hsl(82 25% 45%), hsl(82 25% 65%));
+  --gradient-subtle: linear-gradient(180deg, hsl(82 25% 6%), hsl(82 15% 8%));
+
+  --shadow-elegant: 0 4px 6px -1px hsl(0 0% 0% / 0.25), 0 2px 4px -1px hsl(0 0% 0% / 0.10);
+  --shadow-card: 0 1px 3px 0 hsl(0 0% 0% / 0.20), 0 1px 2px 0 hsl(0 0% 0% / 0.05);
+
+  --sidebar-background: 240 5.9% 10%;
+  --sidebar-foreground: 240 4.8% 95.9%;
+  --sidebar-primary: 224.3 76.3% 48%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 240 3.7% 15.9%;
+  --sidebar-accent-foreground: 240 4.8% 95.9%;
+  --sidebar-border: 240 3.7% 15.9%;
+  --sidebar-ring: 217.2 91.2% 59.8%;
+}
+
+/* -------------------------
+   Map tokens to Tailwind v4 theme (enables bg-background, text-foreground, etc.)
+-------------------------- */
 @theme {
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
-  --color-border: hsl(var(--border));
-  --color-ring: hsl(var(--ring));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
   --color-primary: hsl(var(--primary));
   --color-primary-foreground: hsl(var(--primary-foreground));
   --color-secondary: hsl(var(--secondary));
@@ -43,80 +135,127 @@
   --color-accent-foreground: hsl(var(--accent-foreground));
   --color-destructive: hsl(var(--destructive));
   --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
 
-  /* optional custom fonts to enable classes like font-sans / font-serif */
+  /* optional custom colors if you want utilities like text-math-blue */
+  --color-math-blue: hsl(var(--math-blue));
+  --color-math-blue-light: hsl(var(--math-blue-light));
+  --color-math-gold: hsl(var(--math-gold));
+  --color-math-gold-light: hsl(var(--math-gold-light));
+
+  /* Fonts */
   --font-sans: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   --font-serif: "Crimson Text", Georgia, "Times New Roman", serif;
 }
 
-
-/* ---- Nice defaults for Markdown content ---- */
+/* -------------------------
+   Global base (match old site feel)
+-------------------------- */
 @layer base {
-  .prose { 
-    max-width: 72ch;
-    line-height: 1.65;
-    font-size: 1rem;
+  * { border-color: hsl(var(--border)); } /* makes border utilities use your token */
+
+  body {
+    background: hsl(var(--background));
+    color: hsl(var(--foreground));
+    -webkit-font-smoothing: antialiased;
+            font-smoothing: antialiased;
+    font-family: "Times New Roman", Times, serif; /* academic vibe from old site */
+    font-feature-settings: "liga" 1, "kern" 1;
   }
 
-  /* Headings */
-  .prose h1, .prose h2, .prose h3, .prose h4 {
-    color: hsl(var(--foreground));
+  /* Headings like old site (serif, generous but not shouty) */
+  h1, h2, h3, h4, h5, h6 {
     font-family: "Crimson Text", Georgia, "Times New Roman", serif;
-    line-height: 1.25;
+    font-feature-settings: "liga" 1, "kern" 1, "dlig" 1;
+    line-height: 1.2;
+    color: hsl(var(--foreground));
+    letter-spacing: .2px;
+  }
+  h1 { font-size: 2.25rem; font-weight: 700; line-height: 1.1; }
+  h2 { font-size: 1.875rem; font-weight: 600; line-height: 1.15; }
+  h3 { font-size: 1.5rem; font-weight: 600; line-height: 1.2; }
+
+  /* Cards / subtle elevation (if you use them) */
+  .card { box-shadow: var(--shadow-card); border-radius: var(--radius); }
+}
+
+/* -------------------------
+   Softer, readable Markdown defaults (.prose)
+-------------------------- */
+@layer base {
+  .prose {
+    max-width: 72ch;
+    line-height: 1.7;
+    font-size: 1rem;
+    color: hsl(var(--foreground) / .95);
+  }
+
+  .prose h1, .prose h2, .prose h3, .prose h4 {
+    font-family: "Crimson Text", Georgia, "Times New Roman", serif;
+    color: hsl(var(--foreground));
+    letter-spacing: .2px;
     scroll-margin-top: 6rem;
   }
-  .prose h1 { font-size: 1.875rem; margin: 1.2rem 0 .6rem; font-weight: 700; }
-  .prose h2 { font-size: 1.5rem;   margin: 1rem 0 .5rem;  font-weight: 600; border-bottom: 1px solid hsl(var(--border)); padding-bottom: .25rem; }
-  .prose h3 { font-size: 1.25rem;  margin: .8rem 0 .4rem; font-weight: 600; }
-  .prose h4 { font-size: 1.1rem;   margin: .6rem 0 .3rem; font-weight: 600; }
+  .prose h1 { font-size: 1.75rem; margin: 1.1rem 0 .6rem; font-weight: 700; }
+  .prose h2 {
+    font-size: 1.35rem; margin: .9rem 0 .45rem; font-weight: 600;
+    border-bottom: 1px solid hsl(var(--border) / .6); padding-bottom: .25rem;
+  }
+  .prose h3 { font-size: 1.15rem; margin: .7rem 0 .35rem; font-weight: 600; }
+  .prose h4 { font-size: 1.05rem; margin: .5rem 0 .3rem; font-weight: 600; }
 
-  /* Paragraphs & links */
-  .prose p { margin: .5rem 0; color: hsl(var(--foreground)); }
+  .prose p { margin: .5rem 0; color: hsl(var(--foreground) / .92); }
+
+  /* Softer links */
   .prose a {
     color: hsl(var(--primary));
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 2px;
+    text-decoration: none;
+    border-bottom: 1px dotted hsl(var(--primary) / .6);
   }
-  .prose a:hover { color: hsl(var(--primary-foreground)); background: hsl(var(--primary) / .1); }
+  .prose a:hover {
+    border-bottom-style: solid;
+    background: hsl(var(--primary) / .06);
+  }
 
   /* Lists */
   .prose ul, .prose ol { margin: .5rem 0 .8rem; padding-left: 1.2rem; }
-  .prose li { margin: .25rem 0; }
+  .prose li { margin: .22rem 0; }
   .prose ul { list-style: disc; }
   .prose ol { list-style: decimal; }
-
-  /* Blockquote */
-  .prose blockquote {
-    margin: .8rem 0;
-    padding: .4rem .8rem;
-    border-left: 3px solid hsl(var(--border));
-    color: hsl(var(--muted-foreground));
-    background: hsl(var(--muted) / .35);
-    border-radius: .35rem;
-  }
 
   /* Code */
   .prose code {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-    background: hsl(var(--muted));
+    background: hsl(var(--muted) / .5);
     color: hsl(var(--foreground));
-    padding: .1rem .3rem;
+    padding: .08rem .28rem;
     border-radius: .25rem;
   }
   .prose pre {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-    background: hsl(var(--muted));
+    background: hsl(var(--muted) / .5);
+    border: 1px solid hsl(var(--border) / .7);
     color: hsl(var(--foreground));
-    border: 1px solid hsl(var(--border));
-    padding: .75rem .9rem;
+    padding: .7rem .9rem;
     border-radius: .5rem;
     overflow: auto;
     margin: .8rem 0;
   }
   .prose pre code { background: transparent; padding: 0; }
 
-  /* Tables */
+  /* Blockquote */
+  .prose blockquote {
+    border-left: 3px solid hsl(var(--border) / .8);
+    background: hsl(var(--muted) / .4);
+    color: hsl(var(--muted-foreground));
+    padding: .5rem .85rem;
+    border-radius: .4rem;
+    margin: .8rem 0;
+  }
+
+  /* Tables (default box) */
   .prose table { width: 100%; border-collapse: collapse; margin: .8rem 0; }
   .prose th, .prose td { border: 1px solid hsl(var(--border)); padding: .45rem .6rem; text-align: left; }
   .prose thead th { background: hsl(var(--muted)); color: hsl(var(--foreground)); }
@@ -140,7 +279,7 @@
     font-size: .9em;
   }
 
-  /* MathJax block spacing */
+  /* MathJax spacing */
   .prose .mjx-container { margin: .6rem 0; }
 }
 
@@ -149,66 +288,20 @@
   .prose-narrow { max-width: 62ch; }
 }
 
-
-/* --- Softer typography defaults for Markdown (.prose) --- */
-@layer base {
-  .prose { max-width: 72ch; line-height: 1.7; font-size: 1rem; color: hsl(var(--foreground) / .95); }
-
-  .prose h1, .prose h2, .prose h3, .prose h4 {
-    font-family: "Crimson Text", Georgia, "Times New Roman", serif;
-    color: hsl(var(--foreground));
-    letter-spacing: .2px;
-  }
-  .prose h1 { font-size: 1.75rem; margin: 1.1rem 0 .6rem; font-weight: 700; }
-  .prose h2 { font-size: 1.35rem; margin: .9rem 0 .45rem; font-weight: 600;
-              border-bottom: 1px solid hsl(var(--border) / .6); padding-bottom: .25rem; }
-  .prose h3 { font-size: 1.15rem; margin: .7rem 0 .35rem; font-weight: 600; }
-  .prose h4 { font-size: 1.05rem; margin: .5rem 0 .3rem; font-weight: 600; }
-
-  .prose p { margin: .5rem 0; color: hsl(var(--foreground) / .92); }
-
-  /* Softer links */
-  .prose a {
-    color: hsl(var(--primary));
-    text-decoration: none;
-    border-bottom: 1px dotted hsl(var(--primary) / .6);
-  }
-  .prose a:hover {
-    border-bottom-style: solid;
-    background: hsl(var(--primary) / .06);
-  }
-
-  /* Lists */
-  .prose ul, .prose ol { margin: .5rem 0 .8rem; padding-left: 1.2rem; }
-  .prose li { margin: .22rem 0; }
-
-  /* Code */
-  .prose code {
-    background: hsl(var(--muted) / .5);
-    padding: .08rem .28rem;
-    border-radius: .25rem;
-  }
-  .prose pre {
-    background: hsl(var(--muted) / .5);
-    border: 1px solid hsl(var(--border) / .7);
-    padding: .7rem .9rem; border-radius: .5rem;
-  }
-
-  /* Blockquote */
-  .prose blockquote {
-    border-left: 3px solid hsl(var(--border) / .8);
-    background: hsl(var(--muted) / .4);
-    color: hsl(var(--muted-foreground));
-    padding: .5rem .85rem; border-radius: .4rem;
-  }
-}
-
-/* --- Table with only horizontal separators (no box/grid) --- */
+/* -------------------------
+   Links table variant: only horizontal separators
+-------------------------- */
 @layer base {
   .prose table.table-links { width: 100%; border-collapse: collapse; }
-  .prose table.table-links thead { display: none; }            /* optional: hide header row */
+  .prose table.table-links thead { display: none; } /* remove if you want headers visible */
   .prose table.table-links th,
   .prose table.table-links td { padding: .55rem .25rem; border: 0; }
   .prose table.table-links tr + tr td { border-top: 1px solid hsl(var(--border)); }
   .prose table.table-links tbody tr:hover td { background: hsl(var(--muted) / .35); }
+}
+
+/* Wider reading widths */
+@layer utilities {
+  .prose-wide { max-width: 88ch; }   /* use on most pages */
+  .prose-full { max-width: none; }   /* use when you need full-width tables/images */
 }
