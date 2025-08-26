@@ -1,0 +1,57 @@
+
+:root {
+  --bg: #fff;
+  --fg: #111;
+  --muted: #666;
+  --link: #0b5fff;
+  --card: #f7f7f9;
+  --border: #e6e6ef;
+  --wrap: 920px;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg);
+  font: 16px/1.55 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+}
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 1.25rem; }
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Header */
+.site-header { border-bottom: 1px solid var(--border); background: #fff; position: sticky; top: 0; z-index: 10; }
+.site-title { margin: .2rem 0 .1rem; font-size: 1.25rem; }
+.subtitle { margin: 0 0 .5rem; color: var(--muted); }
+.nav { display: flex; gap: 1rem; flex-wrap: wrap; margin: .25rem 0 .5rem; }
+.nav-link { padding: .3rem .5rem; border-radius: .45rem; }
+.nav-link:hover { background: var(--card); text-decoration: none; }
+
+/* Hero + cards */
+.hero { padding: 1rem 0 0.5rem; }
+.hero h1 { font-size: clamp(1.6rem, 2.4vw + 1rem, 2.2rem); margin: 0 0 .25rem; }
+.lede { font-size: 1.05rem; color: var(--muted); margin: 0.25rem 0 0.6rem; }
+.meta { list-style: none; padding: 0; margin: .4rem 0 1.2rem; color: var(--muted); display: flex; gap: 1rem; flex-wrap: wrap; }
+
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: .9rem; }
+.card {
+  display: block; padding: .9rem .95rem; background: var(--card);
+  border: 1px solid var(--border); border-radius: .65rem; transition: transform .06s ease;
+}
+.card:hover { transform: translateY(-2px); text-decoration: none; }
+.card h2 { margin: 0 0 .25rem; font-size: 1.1rem; }
+
+/* Page */
+.page h1 { font-size: 1.6rem; margin-top: .3rem; }
+.page img, .page video { max-width: 100%; height: auto; }
+
+/* Footer */
+.site-footer { border-top: 1px solid var(--border); margin-top: 2rem; color: var(--muted); font-size: .95rem; }
+.site-footer p { margin: .8rem 0; }
+
+/* Simple dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0c0d10; --fg: #e9e9ee; --muted: #a8a8b3;
+    --link: #74a2ff; --card: #151821; --border: #252834;
+  }
+  .site-header { background: #0c0d10; }
+}
