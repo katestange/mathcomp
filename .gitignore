@@ -1,0 +1,6 @@
+output/
+cache/
+venv/
+.venv/
+__pycache__/
+tailwindcss-linux-x64

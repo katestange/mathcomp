@@ -1,0 +1,214 @@
+@import "tailwindcss";
+
+/* Tell v4 exactly where to scan (optional but useful here) */
+@source "theme/**/*.html";
+@source "content/**/*.md";
+
+/* Your design tokens (the values can be whatever you like) */
+:root {
+  --background: 0 0% 100%;
+  --foreground: 222 47% 11%;
+  --border: 214 32% 91%;
+  --ring: 224 76% 48%;
+  --primary: 224 76% 48%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 220 14% 96%;
+  --secondary-foreground: 222 47% 11%;
+  --muted: 220 14% 96%;
+  --muted-foreground: 215 16% 47%;
+  --accent: 220 14% 96%;
+  --accent-foreground: 222 47% 11%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+  --input: 214 32% 91%;
+  --math-blue: 224 76% 48%;
+  --math-blue-light: 224 80% 60%;
+  --math-gold: 45 100% 47%;
+  --math-gold-light: 45 100% 60%;
+}
+
+/* Make Tailwind generate utilities like bg-background, text-foreground, border-border, etc. */
+@theme {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-border: hsl(var(--border));
+  --color-ring: hsl(var(--ring));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  /* optional custom fonts to enable classes like font-sans / font-serif */
+  --font-sans: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: "Crimson Text", Georgia, "Times New Roman", serif;
+}
+
+
+/* ---- Nice defaults for Markdown content ---- */
+@layer base {
+  .prose { 
+    max-width: 72ch;
+    line-height: 1.65;
+    font-size: 1rem;
+  }
+
+  /* Headings */
+  .prose h1, .prose h2, .prose h3, .prose h4 {
+    color: hsl(var(--foreground));
+    font-family: "Crimson Text", Georgia, "Times New Roman", serif;
+    line-height: 1.25;
+    scroll-margin-top: 6rem;
+  }
+  .prose h1 { font-size: 1.875rem; margin: 1.2rem 0 .6rem; font-weight: 700; }
+  .prose h2 { font-size: 1.5rem;   margin: 1rem 0 .5rem;  font-weight: 600; border-bottom: 1px solid hsl(var(--border)); padding-bottom: .25rem; }
+  .prose h3 { font-size: 1.25rem;  margin: .8rem 0 .4rem; font-weight: 600; }
+  .prose h4 { font-size: 1.1rem;   margin: .6rem 0 .3rem; font-weight: 600; }
+
+  /* Paragraphs & links */
+  .prose p { margin: .5rem 0; color: hsl(var(--foreground)); }
+  .prose a {
+    color: hsl(var(--primary));
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+  .prose a:hover { color: hsl(var(--primary-foreground)); background: hsl(var(--primary) / .1); }
+
+  /* Lists */
+  .prose ul, .prose ol { margin: .5rem 0 .8rem; padding-left: 1.2rem; }
+  .prose li { margin: .25rem 0; }
+  .prose ul { list-style: disc; }
+  .prose ol { list-style: decimal; }
+
+  /* Blockquote */
+  .prose blockquote {
+    margin: .8rem 0;
+    padding: .4rem .8rem;
+    border-left: 3px solid hsl(var(--border));
+    color: hsl(var(--muted-foreground));
+    background: hsl(var(--muted) / .35);
+    border-radius: .35rem;
+  }
+
+  /* Code */
+  .prose code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    background: hsl(var(--muted));
+    color: hsl(var(--foreground));
+    padding: .1rem .3rem;
+    border-radius: .25rem;
+  }
+  .prose pre {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    background: hsl(var(--muted));
+    color: hsl(var(--foreground));
+    border: 1px solid hsl(var(--border));
+    padding: .75rem .9rem;
+    border-radius: .5rem;
+    overflow: auto;
+    margin: .8rem 0;
+  }
+  .prose pre code { background: transparent; padding: 0; }
+
+  /* Tables */
+  .prose table { width: 100%; border-collapse: collapse; margin: .8rem 0; }
+  .prose th, .prose td { border: 1px solid hsl(var(--border)); padding: .45rem .6rem; text-align: left; }
+  .prose thead th { background: hsl(var(--muted)); color: hsl(var(--foreground)); }
+
+  /* Images & figures */
+  .prose img { max-width: 100%; height: auto; border-radius: .5rem; box-shadow: 0 1px 6px rgba(0,0,0,.06); }
+  .prose figure { margin: 1rem 0; text-align: center; }
+  .prose figcaption { color: hsl(var(--muted-foreground)); font-size: .9rem; margin-top: .3rem; }
+
+  /* Horizontal rule */
+  .prose hr { border: 0; border-top: 1px solid hsl(var(--border)); margin: 1rem 0; }
+
+  /* KBD */
+  .prose kbd {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    background: hsl(var(--muted));
+    border: 1px solid hsl(var(--border));
+    border-bottom-width: 3px;
+    padding: .1rem .35rem;
+    border-radius: .35rem;
+    font-size: .9em;
+  }
+
+  /* MathJax block spacing */
+  .prose .mjx-container { margin: .6rem 0; }
+}
+
+/* Optional narrower reading width helper */
+@layer utilities {
+  .prose-narrow { max-width: 62ch; }
+}
+
+
+/* --- Softer typography defaults for Markdown (.prose) --- */
+@layer base {
+  .prose { max-width: 72ch; line-height: 1.7; font-size: 1rem; color: hsl(var(--foreground) / .95); }
+
+  .prose h1, .prose h2, .prose h3, .prose h4 {
+    font-family: "Crimson Text", Georgia, "Times New Roman", serif;
+    color: hsl(var(--foreground));
+    letter-spacing: .2px;
+  }
+  .prose h1 { font-size: 1.75rem; margin: 1.1rem 0 .6rem; font-weight: 700; }
+  .prose h2 { font-size: 1.35rem; margin: .9rem 0 .45rem; font-weight: 600;
+              border-bottom: 1px solid hsl(var(--border) / .6); padding-bottom: .25rem; }
+  .prose h3 { font-size: 1.15rem; margin: .7rem 0 .35rem; font-weight: 600; }
+  .prose h4 { font-size: 1.05rem; margin: .5rem 0 .3rem; font-weight: 600; }
+
+  .prose p { margin: .5rem 0; color: hsl(var(--foreground) / .92); }
+
+  /* Softer links */
+  .prose a {
+    color: hsl(var(--primary));
+    text-decoration: none;
+    border-bottom: 1px dotted hsl(var(--primary) / .6);
+  }
+  .prose a:hover {
+    border-bottom-style: solid;
+    background: hsl(var(--primary) / .06);
+  }
+
+  /* Lists */
+  .prose ul, .prose ol { margin: .5rem 0 .8rem; padding-left: 1.2rem; }
+  .prose li { margin: .22rem 0; }
+
+  /* Code */
+  .prose code {
+    background: hsl(var(--muted) / .5);
+    padding: .08rem .28rem;
+    border-radius: .25rem;
+  }
+  .prose pre {
+    background: hsl(var(--muted) / .5);
+    border: 1px solid hsl(var(--border) / .7);
+    padding: .7rem .9rem; border-radius: .5rem;
+  }
+
+  /* Blockquote */
+  .prose blockquote {
+    border-left: 3px solid hsl(var(--border) / .8);
+    background: hsl(var(--muted) / .4);
+    color: hsl(var(--muted-foreground));
+    padding: .5rem .85rem; border-radius: .4rem;
+  }
+}
+
+/* --- Table with only horizontal separators (no box/grid) --- */
+@layer base {
+  .prose table.table-links { width: 100%; border-collapse: collapse; }
+  .prose table.table-links thead { display: none; }            /* optional: hide header row */
+  .prose table.table-links th,
+  .prose table.table-links td { padding: .55rem .25rem; border: 0; }
+  .prose table.table-links tr + tr td { border-top: 1px solid hsl(var(--border)); }
+  .prose table.table-links tbody tr:hover td { background: hsl(var(--muted) / .35); }
+}

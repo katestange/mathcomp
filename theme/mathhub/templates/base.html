@@ -1,0 +1,54 @@
+
+<!doctype html>
+<html lang="{{ DEFAULT_LANG or 'en' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{% block title %}{{ SITENAME }}{% endblock %}</title>
+  <link rel="stylesheet" href="{{ (SITEURL or '') }}/static/css/mathhub.css?v=1">
+</head>
+<body class="bg-background text-foreground">
+  <header class="border-b border-border bg-background sticky top-0 z-10">
+    <div class="max-w-screen-lg mx-auto px-4">
+      <div class="py-3">
+        <h1 class="text-lg font-semibold">
+          <a href="{{ (SITEURL or '') }}/">{{ SITENAME }}</a>
+        </h1>
+        {% if SITESUBTITLE %}
+          <p class="text-sm text-muted-foreground">{{ SITESUBTITLE }}</p>
+        {% endif %}
+      </div>
+
+      {# figure out current page to highlight the active tab #}
+      {% set current = (page.url if page is defined
+                        else (article.url if article is defined
+                        else 'index.html')) %}
+
+      {% if MENUITEMS %}
+      <nav class="flex gap-1 overflow-x-auto -mb-px">
+        {% for text, url in MENUITEMS %}
+          {% set is_active = (current == url) %}
+          <a href="{{ url }}"
+             class="px-3 py-2 text-sm whitespace-nowrap border-b-2
+                    {{ 'border-primary text-foreground font-medium'
+                       if is_active
+                       else 'border-transparent text-muted-foreground hover:text-foreground hover:border-border' }}">
+            {{ text }}
+          </a>
+        {% endfor %}
+      </nav>
+      {% endif %}
+    </div>
+  </header>
+
+  <main class="max-w-screen-lg mx-auto px-4 py-6">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="border-t border-border">
+    <div class="max-w-screen-lg mx-auto px-4 py-4 text-sm text-muted-foreground">
+      <p>&copy; {{ AUTHOR or SITENAME }} · {{ CURRENTYEAR or '' }}</p>
+    </div>
+  </footer>
+</body>
+</html>
