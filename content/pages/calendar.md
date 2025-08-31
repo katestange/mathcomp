@@ -13,7 +13,7 @@ URL: calendar.html
 Wednesday, September 3, 2025 | CS3:  DNA Visualization (python lists and dictionaries, correlations, coding principles)    | [Empty Notebook](static/notebooks/CS03-DNAVis-Empty.ipynb) ; [Filled Notebook](static/notebooks/CS03-DNAVis.ipynb) ; [DNA.png](static/notebooks/DNA.png) ; [DNA2.png](static/notebooks/DNA2.png) |
 | Friday, September 5, 2025 | Take up CS3; CS4:  Percolation (python sets, recursion, breadth-first and depth-first search)     | [Empty Notebook](static/notebooks/CS04-Percolation-Empty.ipynb) ; [Filled Notebook](static/notebooks/CS04-Percolation.ipynb) |
 | Monday, September 8, 2025 | Take up CS4; CS5: Primes and Riemann Zeta (graphing data, complex plots)    |  [Empty Notebook](static/notebooks/CS05-RH-Empty.ipynb) ; [Filled Notebook](static/notebooks/CS05-RH.ipynb) |
-| Wednesday, September 10, 2025 | Take up CS5; CS6:  TBA   |  links TBA |
+| Wednesday, September 10, 2025 | Take up CS5; CS6: Classes (python classes, error handling, types)   |  [Empty Notebook](static/notebooks/CS06-BhargavaCubes-Empty.ipynb) ; [Filled Notebook](static/notebooks/CS06-BhargavaCubes.ipynb) |
 | Friday, September 12, 2025 | TBA   |  links TBA |
 | Monday, September 15, 2025 | TBA   |  links TBA |
 | Wednesday, September 17, 2025 | TBA   |  links TBA |
